@@ -104,7 +104,7 @@
     const messageElement = document.getElementById("message");
     const newGameButton = document.getElementById("newGameButton");
     const resetButton = document.getElementById("resetButton");
-    let currentPlayer = "X"; // Human plays X
+    let currentPlayer = "X"; 
     let gameOver = false;
 
     // Check for a winner
@@ -125,7 +125,6 @@
       );
     };
 
-    // Handle computer's move (random empty cell)
     const computerMove = () => {
       if (gameOver) return;
       
@@ -133,12 +132,11 @@
       if (availableCells.length > 0) {
         const randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
         randomCell.textContent = "O";
-        randomCell.removeEventListener("click", humanMove); // Remove listener after computer plays
+        randomCell.removeEventListener("click", humanMove); 
         checkGameStatus();
       }
     };
 
-    // Handle human's move
     const humanMove = (event) => {
       if (gameOver || event.target.textContent !== "") return;
       
@@ -146,13 +144,12 @@
       event.target.removeEventListener("click", humanMove);
       checkGameStatus();
       if (!gameOver) {
-        currentPlayer = "O"; // Switch to computer
-        computerMove(); // Make computer move
-        currentPlayer = "X"; // Switch back to human
+        currentPlayer = "O"; 
+        computerMove(); 
+        currentPlayer = "X"; 
       }
     };
 
-    // Check if the game is over
     const checkGameStatus = () => {
       if (checkWinner("X")) {
         messageElement.textContent = "You win!";
@@ -166,7 +163,6 @@
       }
     };
 
-    // Reset the board without starting a new game
     const resetBoard = () => {
       cells.forEach(cell => {
         cell.textContent = "";
@@ -176,22 +172,18 @@
       gameOver = false;
     };
 
-    // Reset the game (clear board and reset message)
     const resetGame = () => {
       resetBoard();
-      currentPlayer = "X"; // Human starts
-      setTimeout(computerMove, 500); // Start with computer move after reset
+      currentPlayer = "X"; 
+      setTimeout(computerMove, 500); 
     };
 
-    // Event listener for the New Game button
     newGameButton.addEventListener("click", resetGame);
 
-    // Event listener for the Reset button (clears the board)
     resetButton.addEventListener("click", resetBoard);
 
-    // Set up initial game state
     cells.forEach(cell => cell.addEventListener("click", humanMove));
-    setTimeout(computerMove, 500); // Make computer play after the first move
+    setTimeout(computerMove, 500); 
 
   </script>
 </body>
